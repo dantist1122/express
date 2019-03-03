@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.use(function timeLog(req, res, next){
-    console.log('Time: ', Date.now());
+    console.log('Time: ', new Date());
     next();
 });
 
@@ -13,6 +13,10 @@ router.get('/', function (req, res){
 
 router.get('/about', function (req, res){
     res.send('About birds');
+});
+
+router.get('/kind', function(req, res){
+    res.send('Juravli, sinichki, vorobushki')
 });
 
 

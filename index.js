@@ -3,6 +3,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const PORT = 7000;
 const birds = require('./birds');
+const path = require('path');
+
+
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname + '/index.html'))
+});
 
 
 app.use((req, res, next)=>{
@@ -28,6 +34,10 @@ app.get('/hello', function(req, res, next) {
     res.status(200).json({name: "Ivan"});
 
 });
+
+// app.get('/', function (req, res){
+//     res.render('index.html');
+// });
 
 app.route('/book')
     .get(function(req, res){
