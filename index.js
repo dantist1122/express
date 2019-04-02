@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({extended: false})); // support encoded bodies
 app.use(bodyParser.json()); // support json encoded bodies
 
 app.get('/hello', function (req, res, next) {
-    console.log("will be the next message")
+    console.log("will be the next message");
     next()
 }, function (req, res) {
     res.status(200).json({name: "Ivan"});
@@ -42,6 +42,24 @@ app.get('/hello', function (req, res, next) {
 // app.get('/', function (req, res){
 //     res.render('index.html');
 // });
+app.use(express.urlancoded());
+app.post('/submit', function(req, res) {
+    console.log('submit');
+    // const username  = req.body.firstName;
+    res.end();
+});
+
+app.get('/submit', function(req, res) {
+    console.log("erg");
+
+});
+
+
+
+
+
+
+
 
 app.route('/book')
     .get(function (req, res) {
