@@ -6,7 +6,7 @@ const birds = require('./birds');
 const path = require('path');
 
 
-app.get('/', function (req, res, next) {
+app.get('/submit', function (req, res, next) {
     res.sendFile(path.join(__dirname + '/index.html'));
     next();
 }, function (){
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(bodyParser.urlencoded({extended: false})); // support encoded bodies
+app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 app.use(bodyParser.json()); // support json encoded bodies
 
 app.get('/hello', function (req, res, next) {
@@ -42,15 +42,24 @@ app.get('/hello', function (req, res, next) {
 // app.get('/', function (req, res){
 //     res.render('index.html');
 // });
-app.use(express.urlancoded());
+//app.use(express.urlancoded());
+
+//app.use(app.router);
+
+
 app.post('/submit', function(req, res) {
     console.log('submit');
+    res.send(req.body.firstName +" " + req.body.lastName);
+
+
     // const username  = req.body.firstName;
-    res.end();
+   // res.end();
 });
 
-app.get('/submit', function(req, res) {
+app.get('/', function(req, res) {
+    res.redirect('/submit');
     console.log("erg");
+    res.end();
 
 });
 
