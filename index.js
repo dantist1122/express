@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const PORT = 7000;
 const birds = require('./birds');
 const path = require('path');
-
+const admin = express();
 
 app.get('/submit', function (req, res, next) {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -48,9 +48,9 @@ app.get('/hello', function (req, res, next) {
 
 
 app.post('/submit', function(req, res) {
-    console.log('submit');
-    res.send(req.body.firstName +" " + req.body.lastName);
-
+    console.log('submit post');
+    let firstLast = req.body.firstName +" " + req.body.lastName;
+    res.send(firstLast);
 
     // const username  = req.body.firstName;
    // res.end();
@@ -59,7 +59,7 @@ app.post('/submit', function(req, res) {
 app.get('/', function(req, res) {
     res.redirect('/submit');
     console.log("erg");
-    res.end();
+   // res.end();
 
 });
 
@@ -81,5 +81,16 @@ app.route('/book')
 
 app.use('/birds', birds);
 
+// add admin homePage////////////////////////////////
+
+admin.get('/', function (req, res){
+   console.log(admin.mountpath);
+   res.send('Admin Homepage');
+});
+app.use('/adm%n', admin)
+
+
+app.disable('trust proxy');
+app.get('trust proxy');
 
 app.listen(PORT, () => console.log('SERVER WORKS'));
